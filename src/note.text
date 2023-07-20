@@ -1,0 +1,7 @@
+I using security points npm and mongo db data store for data Server side node js and express js framework use
+1 JWT authenticate
+2 Joi server validations
+3 Mongo db database related validations
+4 Headers security use helmet
+5 password encruption use becrupt
+6 And config related use env

@@ -33,3 +33,4 @@ npm start
 - This JSON file postman collection all APIS
 Twitter api Docs_collection.json
 
+- This note.txt file add project related instruction
