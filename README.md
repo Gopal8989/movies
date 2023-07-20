@@ -15,6 +15,7 @@
 - Install dependencies
 ```
 cd <project-name>
+
 npm install
 ```
 - Configure .env file (rename .env.example to .env)
@@ -28,4 +29,7 @@ Create database tweetdb and update connection details in .env file
 npm start
 ```
 -  Navigate to `http://localhost:7080`
+
+- This JSON file postman collection all APIS
+Twitter api Docs_collection.json
 
