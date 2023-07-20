@@ -1,0 +1,523 @@
+{
+	"info": {
+		"_postman_id": "b6e518d2-5601-490d-a767-ad1866073c69",
+		"name": "Twitter clone api Docs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"email\": \"ravi211qq11111dd@gmail.com\",\r\n    \"password\": \"Test@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/api/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"ravi\",\r\n    \"last_name\": \"regar\",\r\n    \"email\": \"ravi211qq1@gmail.com\",\r\n    \"password\": \"Test@123\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODIxMDQ3YWI2M2ZlZDg1ZTRkY2M4IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTc5MjI5NywiZXhwIjoxNjkwMDUxNDk3fQ.JHk5mTkq5P7Lti7HORqJO6SLFcci58QHQoRW0HpXDSw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ravi\",\r\n    \"description\": \"regar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/user/detail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user",
+						"detail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODIxMDQ3YWI2M2ZlZDg1ZTRkY2M4IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTc5MjExMywiZXhwIjoxNjkwMDUxMzEzfQ.vIcDBRPLjQ6qL7GcfJT4dZa-PfYMvKsdUO4KzakX7Gc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"sajay\",\r\n    \"last_name\": \"ratthore\",\r\n    \"email\": \"sanjay@gmail.com\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/user/64b821047ab63fed85e4dcc8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user",
+						"64b821047ab63fed85e4dcc8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODIxMDQ3YWI2M2ZlZDg1ZTRkY2M4IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTc5MjI5NywiZXhwIjoxNjkwMDUxNDk3fQ.JHk5mTkq5P7Lti7HORqJO6SLFcci58QHQoRW0HpXDSw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "64451bbd288c7ef6c6abb51a",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "skip",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/api/user/64452b43b306e7bb625b131c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user",
+						"64452b43b306e7bb625b131c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add tweet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"last\",\r\n    \"description\": \"ressssssgar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/tweet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"tweet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update tweet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"lalucddcc\",\r\n    \"description\": \"ddregar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/tweet/64b96476c3576056895c6817",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"tweet",
+						"64b96476c3576056895c6817"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tweet list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiOTZiODM0MGVmNzI5ZDk1OWEyN2I5IiwiZW1haWwiOiJyYXZpMjExcXExMTExMWRkQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MzI5NiwiZXhwIjoxNjkwMTMyNDk2fQ.7eLXr0CvuYVe_OR9w_A94XkFGKzARa1gWzsUSmCeEu0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ravi\",\r\n    \"description\": \"regar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/tweet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"tweet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tweet details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ravi\",\r\n    \"description\": \"regar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/tweet/64b963c1aa3d165a35153387",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"tweet",
+						"64b963c1aa3d165a35153387"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tweet delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ravi\",\r\n    \"description\": \"regar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/tweet/64b964a5ffb38c563a188cab",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"tweet",
+						"64b964a5ffb38c563a188cab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Follow user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": \"64b821047ab63fed85e4dcc8\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/follow-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"follow-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Follow user list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": \"64b8373c846672d9b551e4f7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/follow-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"follow-user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

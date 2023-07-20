@@ -1,13 +1,13 @@
 // Init code
 const mongoose = require("mongoose");
 
-const departmentSchema = mongoose.Schema(
+const followerSchema = mongoose.Schema(
     {
-        name: {
-            type: String,
+        follow_id: {
+            type: mongoose.Schema.ObjectId,
             required: true,
         },
-        employee_id: {
+        follower_id: {
             type: mongoose.Schema.ObjectId,
             required: true,
         },
@@ -18,4 +18,4 @@ const departmentSchema = mongoose.Schema(
 );
 
 // Module exports
-module.exports = mongoose.model("departments", departmentSchema);
+module.exports = mongoose.model("followers", followerSchema);

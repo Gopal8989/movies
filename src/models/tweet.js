@@ -1,12 +1,16 @@
 // Init code
 const mongoose = require("mongoose");
-const citySchema = mongoose.Schema(
+const tweetSchema = mongoose.Schema(
     {
-        name: {
+        title: {
             type: String,
             required: true,
         },
-        employee_id: {
+        description: {
+            type: String,
+            required: true,
+        },
+        user_id: {
             type: mongoose.Schema.ObjectId,
             required: true,
         },
@@ -17,4 +21,4 @@ const citySchema = mongoose.Schema(
 );
 
 // Module exports
-module.exports = mongoose.model("cities", citySchema);
+module.exports = mongoose.model("tweetes", tweetSchema);
