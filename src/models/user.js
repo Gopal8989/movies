@@ -144,32 +144,9 @@ module.exports.userCreate = async (req) => {
             // { session }
         );
         return await userModel.save();
-        // if (userResult) {
-        //     const employeeId = new ObjectId(userResult?._id);
-        //     let cityModel = tweetSchema({
-        //         employee_id: employeeId,
-        //         name: city,
 
-        //     },
-        //         // { session }
-        //     );
-        //     await cityModel.save();
-        //     let departmentModel = followerSchema({
-        //         employee_id: employeeId,
-        //         name: department,
-
-        //     },
-        //         // { session }
-        //     );
-        //     await departmentModel.save();
-        //     // await session.commitTransaction();
-        //     // await session.endSession();
-        //     return userResult;
-
-        // }
         // await session.abortTransaction();
         // await session.endSession();
-        return false
     } catch (error) {
         // await session.abortTransaction();
         // await session.endSession();
@@ -325,7 +302,6 @@ module.exports.tweetList = async (req) => {
                 query.user_id = id;
             }
         }
-        console.log(query)
         let matchQuery = [
             { "$match": query },
             {
