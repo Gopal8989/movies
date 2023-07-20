@@ -21,7 +21,7 @@ npm install
 
 - Setup database
 ```
-Create database goodguyz and update connection details in .env file
+Create database tweetdb and update connection details in .env file
 ```
 - Build and run the project
 ```
