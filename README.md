@@ -1,4 +1,4 @@
-# TEST API
+# Bcekend Twitter clone API
 
 # Table of Contents
 [Pre-requisites](#Pre-requisites)
