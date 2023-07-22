@@ -1,0 +1,681 @@
+{
+	"info": {
+		"_postman_id": "b6e518d2-5601-490d-a767-ad1866073c69",
+		"name": "Movies clone api Docs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"email\": \"ravi211qq11111dd@gmail.com\",\r\n    \"password\": \"Test@134\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Email verify",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/user/email-veriry/BP9C49",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user",
+						"email-veriry",
+						"BP9C49"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset pssword clcikc change password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ravi211qq11111dd@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/reset/password/link",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"reset",
+						"password",
+						"link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset pssword link sent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"Test@134\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/reset/password/SBD20L",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"reset",
+						"password",
+						"SBD20L"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkwMDE5MzU1LCJleHAiOjE2OTAyNzg1NTV9.em8lfDzB_GmsC5hBfNyxHRH5Sq9AGGPzQ8sYgdkpx4k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/api/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"ravisss\",\r\n    \"lastName\": \"regar\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"Test@123\",\r\n    \"userType\": \"user\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkwMDE5MzU1LCJleHAiOjE2OTAyNzg1NTV9.em8lfDzB_GmsC5hBfNyxHRH5Sq9AGGPzQ8sYgdkpx4k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ravi\",\r\n    \"description\": \"regar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/user/detail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user",
+						"detail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkwMDE5MzU1LCJleHAiOjE2OTAyNzg1NTV9.em8lfDzB_GmsC5hBfNyxHRH5Sq9AGGPzQ8sYgdkpx4k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"firstName\": \"ravisss\",\r\n    \"lastName\": \"regar\",\r\n    \"email\": \"1111@gmail.com\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/user/64b821047ab63fed85e4dcc8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user",
+						"64b821047ab63fed85e4dcc8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODIxMDQ3YWI2M2ZlZDg1ZTRkY2M4IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTc5MjI5NywiZXhwIjoxNjkwMDUxNDk3fQ.JHk5mTkq5P7Lti7HORqJO6SLFcci58QHQoRW0HpXDSw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/api/user?sortBy=firstName&limit=11&offset=0&search=&sortType=DESC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "firstName"
+						},
+						{
+							"key": "limit",
+							"value": "11"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "search",
+							"value": ""
+						},
+						{
+							"key": "sortType",
+							"value": "DESC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list user audit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODIxMDQ3YWI2M2ZlZDg1ZTRkY2M4IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTc5MjI5NywiZXhwIjoxNjkwMDUxNDk3fQ.JHk5mTkq5P7Lti7HORqJO6SLFcci58QHQoRW0HpXDSw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/api/user/login-log?sortBy=firstName&limit=11&offset=0&search=&sortType=DESC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"user",
+						"login-log"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "firstName"
+						},
+						{
+							"key": "limit",
+							"value": "11"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "search",
+							"value": ""
+						},
+						{
+							"key": "sortType",
+							"value": "DESC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list movies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoicmF2aXNzcyIsImxhc3ROYW1lIjoicmVnYXIiLCJlbWFpbCI6IjExMTFhYWFAZ21haWwuY29tIiwiaXNFbWFpbFZlcmlmeSI6MSwicGFzc3dvcmQiOiIkMmEkMTAkd05lTXFNVU9qempSeGtxM3NmclNaLk9hc1A2dC53Qy53ck5TN0hzT2JneXIvb0Z6eVBzanUiLCJ0b2tlbiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpwWkNJNk5Dd2lhV0YwSWpveE5qa3dNREkyTlRrNExDSmxlSEFpT2pFMk9UQXlPRFUzT1RoOS5ScnR2SzY4cHUzb0VQdkF3RjJvTWxyQ3RSRTBuazdtWmlkQ1B4VVR6VWtjIiwicmVzZXRUb2tlbiI6ImRpNjJUUCIsInVzZXJUeXBlIjoiYWRtaW4iLCJjcmVhdGVkQnlJZCI6bnVsbCwidXBkYXRlZEJ5SWQiOm51bGwsImRlbGV0ZWRCeUlkIjpudWxsLCJjcmVhdGVkQXQiOiIyMDIzLTA3LTIyVDExOjQ3OjM5LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTA3LTIyVDExOjQ5OjU4LjAwMFoiLCJpYXQiOjE2OTAwMjg1MDIsImV4cCI6MTY5MDI4NzcwMn0.7I_z40Din7HQIMCEfP43HRxICysUrMbTYz1KcITvIzs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/api/movies?sortBy=firstName&limit=11&offset=0&search=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "sortBy",
+							"value": "firstName"
+						},
+						{
+							"key": "limit",
+							"value": "11"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "search",
+							"value": ""
+						},
+						{
+							"key": "sortType",
+							"value": "DESC",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoicmF2aXNzcyIsImxhc3ROYW1lIjoicmVnYXIiLCJlbWFpbCI6IjExMTFhYWFAZ21haWwuY29tIiwiaXNFbWFpbFZlcmlmeSI6MSwicGFzc3dvcmQiOiIkMmEkMTAkd05lTXFNVU9qempSeGtxM3NmclNaLk9hc1A2dC53Qy53ck5TN0hzT2JneXIvb0Z6eVBzanUiLCJ0b2tlbiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpwWkNJNk5Dd2lhV0YwSWpveE5qa3dNREkyTlRrNExDSmxlSEFpT2pFMk9UQXlPRFUzT1RoOS5ScnR2SzY4cHUzb0VQdkF3RjJvTWxyQ3RSRTBuazdtWmlkQ1B4VVR6VWtjIiwicmVzZXRUb2tlbiI6ImRpNjJUUCIsInVzZXJUeXBlIjoiYWRtaW4iLCJjcmVhdGVkQnlJZCI6bnVsbCwidXBkYXRlZEJ5SWQiOm51bGwsImRlbGV0ZWRCeUlkIjpudWxsLCJjcmVhdGVkQXQiOiIyMDIzLTA3LTIyVDExOjQ3OjM5LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTA3LTIyVDExOjQ5OjU4LjAwMFoiLCJpYXQiOjE2OTAwMjg1MDIsImV4cCI6MTY5MDI4NzcwMn0.7I_z40Din7HQIMCEfP43HRxICysUrMbTYz1KcITvIzs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"bdjasas,sfnmasn\",\r\n    \"description\": \"bdjasas,sfnmasn\",\r\n    \"year\": \"2023\",\r\n    \"director\": \"bdjasas,sfnmasn\",\r\n    \"duration\": 1,\r\n    \"genere\": \"bdjasas,sfnmasn\",\r\n    \"type\": \"movie\",\r\n    \"coverImage\": \"public\\\\uploads\\\\movies\\\\GOPALRegarCV-1690029255964.pdf\",\r\n    \"file\": \"public\\\\uploads\\\\movies\\\\GOPALRegarCV-1690029283854.pdf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Media upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoicmF2aXNzcyIsImxhc3ROYW1lIjoicmVnYXIiLCJlbWFpbCI6IjExMTFhYWFAZ21haWwuY29tIiwiaXNFbWFpbFZlcmlmeSI6MSwicGFzc3dvcmQiOiIkMmEkMTAkd05lTXFNVU9qempSeGtxM3NmclNaLk9hc1A2dC53Qy53ck5TN0hzT2JneXIvb0Z6eVBzanUiLCJ0b2tlbiI6ImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpwWkNJNk5Dd2lhV0YwSWpveE5qa3dNREkyTlRrNExDSmxlSEFpT2pFMk9UQXlPRFUzT1RoOS5ScnR2SzY4cHUzb0VQdkF3RjJvTWxyQ3RSRTBuazdtWmlkQ1B4VVR6VWtjIiwicmVzZXRUb2tlbiI6ImRpNjJUUCIsInVzZXJUeXBlIjoiYWRtaW4iLCJjcmVhdGVkQnlJZCI6bnVsbCwidXBkYXRlZEJ5SWQiOm51bGwsImRlbGV0ZWRCeUlkIjpudWxsLCJjcmVhdGVkQXQiOiIyMDIzLTA3LTIyVDExOjQ3OjM5LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTA3LTIyVDExOjQ5OjU4LjAwMFoiLCJpYXQiOjE2OTAwMjg1MDIsImV4cCI6MTY5MDI4NzcwMn0.7I_z40Din7HQIMCEfP43HRxICysUrMbTYz1KcITvIzs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Lenovo/Downloads/GOPALRegarCV.pdf"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/upload-media",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"upload-media"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"bdjasas,sfnmasn\",\r\n    \"description\": \"bdjasas,sfnmasn\",\r\n    \"year\": \"2023\",\r\n    \"director\": \"bdjasas,sfnmasn\",\r\n    \"duration\": 1,\r\n    \"genere\": \"bdjasas,sfnmasn\",\r\n    \"type\": \"movie\",\r\n    \"coverImage\": \"bdjasas,sfnmasn\",\r\n    \"file\": \"sdfgd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/movies/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"movies",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movie details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ravi\",\r\n    \"description\": \"regar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/movies/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"movies",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movies delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjRiODM3M2M4NDY2NzJkOWI1NTFlNGY3IiwiZW1haWwiOiJyYXZpMjExcXExQGdtYWlsLmNvbSIsImlhdCI6MTY4OTg3MTEwNiwiZXhwIjoxNjkwMTMwMzA2fQ.AWWO_uikXqVRaTN3M9xAEZ1weltAOQYGY6uKcnAYY_I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ravi\",\r\n    \"description\": \"regar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/movies/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"movies",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rating",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkwMDI2NTk4LCJleHAiOjE2OTAyODU3OTh9.RrtvK68pu3oEPvAwF2oMlrCtRE0nk7mZidCPxUTzUkc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rating\": \"5\",\r\n    \"review\": \"fd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/rating/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"rating",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
