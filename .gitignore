@@ -1,2 +1,16 @@
-/node_modules
-/.env
+# Dependencies
+node_modules
+
+# yarn error logs
+yarn-error.log
+
+# Environment varibales
+.env*
+!.env*.example
+
+# All package json
+package-lock.json
+
+# logs
+
+
