@@ -14,7 +14,7 @@ const {
     MovieRating
 } = models;
 /**
- * Create Admin
+ * Create Admin and user
  * @param {object} req
  * @returns
  */
@@ -46,7 +46,7 @@ module.exports.userCreate = async (req) => {
 };
 
 /**
- * Create Admin
+ * Update Admin and user
  * @param {object} req
  * @returns
  */
@@ -68,7 +68,7 @@ module.exports.userUpdate = async (req) => {
     }
 };
 /**
- * Create Admin
+ * user login
  * @param {object} req
  * @returns
  */
@@ -124,7 +124,7 @@ module.exports.userdetails = async (req) => {
 
 
 /**
-* Get user details
+* check user details
 * @param {object} req
 * @returns
 */
@@ -138,7 +138,7 @@ module.exports.checkUserdetails = async (where) => {
 
 
 /**
- *  Admin get list of all customers
+ *  user list 
  * @param {object} req
  * @returns
  */
@@ -186,7 +186,11 @@ module.exports.userList = async (req) => {
     }
 };
 
-
+/**
+ *  user login log list 
+ * @param {object} req
+ * @returns
+ */
 module.exports.userLoginLogList = async (req) => {
     try {
         const {
@@ -277,7 +281,7 @@ module.exports.moviesCreate = async (req) => {
 };
 
 /**
- * Create Admin
+ * movies update
  * @param {object} req
  * @returns
  */
@@ -306,7 +310,7 @@ module.exports.moviesUpdate = async (req) => {
 };
 
 /**
-* Get user details
+* Get movies details
 * @param {object} req
 * @returns
 */
@@ -327,7 +331,7 @@ module.exports.moviesGet = async (req) => {
 };
 
 /**
-* Get user details
+* movies delete
 * @param {object} req
 * @returns
 */
@@ -348,7 +352,7 @@ module.exports.moviesDelete = async (req) => {
 };
 
 /**
- *  Admin get list of all customers
+ *  movies list
  * @param {object} req
  * @returns
  */
