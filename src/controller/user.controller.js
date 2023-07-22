@@ -240,9 +240,9 @@ module.exports.resetPasswordLink = async (req, res, next) => {
                 <body>
                 <p>Hello dear,</p>
                   <h1>Your password link expire 1 hours</h1>
-                  <a href='${config?.app?.baseUrl}change/password/${result?.resetToken}'>Click here</a>
+                  <a href='${config?.app?.baseUrl}change/password/${req.body.resetToken}'>Click here</a>
                 </body>        
-                </html>`, subject: 'Reset password', to: result?.email
+                </html>`, subject: 'Reset password', to: userResult?.email
                 });
                 res.status(statusCode.OK).json({
                     success: true,

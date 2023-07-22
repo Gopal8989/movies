@@ -36,6 +36,7 @@ module.exports.sendGridEmail = async (obj) => {
             () => { },
             (error) => {
                 if (error.response) {
+                    console.log(error)
                 }
             }
         );
