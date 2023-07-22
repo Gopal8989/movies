@@ -1,4 +1,6 @@
 const dotenv = require('dotenv');
+const path = require('path');
+const fs = require('fs');
 const language = require('../language/index.js');
 dotenv.config();
 
@@ -60,6 +62,56 @@ exports.pick = (object, keys) => {
             }
             return obj;
         }, {});
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+exports.generateRandomString = (length) => {
+    try {
+        let chars = 'klmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        chars = `${chars}0123456789abcdefghij`;
+        let output = '';
+
+        for (let x = 0; x < length; x += 1) {
+            const i = Math.floor(Math.random() * 62);
+            output += chars.charAt(i);
+        }
+        return output;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+
+exports.getImage = (str, defaultIcon, type, thumbImage = null) => {
+    try {
+        // type = type ?? 'private';
+        if (str) {
+            const imagePathArray = str.split('/');
+            const imageName = imagePathArray.pop();
+            let thumbPath = path.parse(imageName);
+            (thumbPath = `${thumbPath.dir}/thumb/${thumbPath.base}`),
+                imagePathArray.push(thumbImage ? thumbPath : imageName);
+
+
+            if (this.isFileExist(str)) {
+                return `${this.getEnv(
+                    'BASE_URL'
+                )}/${imagePathArray.join('/')}`;
+            }
+            return defaultIcon;
+        }
+        return defaultIcon;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+exports.isFileExist = (filePath) => {
+    try {
+        const tmpPath = path.join(path.resolve(), `${filePath}`);
+        return fs.existsSync(tmpPath) || false;
     } catch (error) {
         throw new Error(error);
     }

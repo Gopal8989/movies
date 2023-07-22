@@ -1,4 +1,3 @@
-const path = require('path');
 const utils = require('../utils/common.js');
 
 module.exports = {
@@ -7,9 +6,11 @@ module.exports = {
         baseUrl: utils.getEnv('BASE_URL'),
         siteName: utils.getEnv('APP_NAME'),
     },
-    db: {
-        dbUrl: utils.getEnv('DB_URL'),
-    },
     jwtSecret: utils.getEnv('JWT_SECRET'),
     jwtExpireIn: utils.getEnv('JWT_EXPIRE_IN'),
+
+    sendGrid: {
+        skdSendGrid: utils.getEnv('SEND_GRID_SKD'),
+        email: utils.getEnv('SEND_GRID_FROM_EMAIL'),
+    },
 };

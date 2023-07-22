@@ -1,20 +1,37 @@
 
-const { ObjectId } = require("mongodb");
-const utility = require('../utils/common.js');
-const userModel = require('../models/user.js');
-const { statusCode } = require('../constant/status-code.js');
 
+const bcrypt = require('bcryptjs');
+const utility = require('../utils/common.js');
+const userRepository = require('../repositories/user.repository.js');
+const { statusCode } = require('../constant/status-code.js');
+const config = require('../config/index.js')
+const { sendGridEmail } = require('../service/sendgrid.service.js')
+const { generateRandomString } = require('../utils/common.js')
 module.exports.userLogin = async (req, res, next) => {
     try {
-        const emailResult = await userModel.checkEmail(req);
-        if (emailResult) {
-            const result = await userModel.userLogin(req, emailResult)
-            if (result) {
-                res.status(statusCode.OK).json({
-                    success: true,
-                    message: utility.getMessage(req, false, 'LOGIN_SUCCESS'),
-                    data: { token: result }
-                })
+        const emailResult = await userRepository.userdetails(req);
+        if (emailResult && !emailResult?.isEmailVerify) {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'EMAIL_NOT_VERFIRY'),
+                data: null
+            })
+        } else
+            if (emailResult) {
+                const result = await userRepository.userLogin(req, emailResult)
+                if (result) {
+                    res.status(statusCode.OK).json({
+                        success: true,
+                        message: utility.getMessage(req, false, 'LOGIN_SUCCESS'),
+                        data: { token: result }
+                    })
+                } else {
+                    res.status(statusCode.BAD_REQUEST).json({
+                        success: false,
+                        message: utility.getMessage(req, false, 'WRONG_CREDENTIAL'),
+                        data: null
+                    })
+                }
             } else {
                 res.status(statusCode.BAD_REQUEST).json({
                     success: false,
@@ -22,13 +39,6 @@ module.exports.userLogin = async (req, res, next) => {
                     data: null
                 })
             }
-        } else {
-            res.status(statusCode.BAD_REQUEST).json({
-                success: false,
-                message: utility.getMessage(req, false, 'WRONG_CREDENTIAL'),
-                data: null
-            })
-        }
     }
     catch (error) {
         next(error)
@@ -38,7 +48,8 @@ module.exports.userLogin = async (req, res, next) => {
 
 module.exports.userLogout = async (req, res, next) => {
     try {
-        const emailResult = await userModel.userLogout(req);
+        req.body.token = null;
+        const emailResult = await userRepository.userUpdate(req);
         if (emailResult) {
             res.status(statusCode.OK).json({
                 success: true,
@@ -60,7 +71,7 @@ module.exports.userLogout = async (req, res, next) => {
 
 module.exports.userCreate = async (req, res, next) => {
     try {
-        const emailResult = await userModel.checkEmail(req);
+        const emailResult = await userRepository.userdetails(req);
         if (emailResult) {
             res.status(statusCode.BAD_REQUEST).json({
                 success: false,
@@ -68,7 +79,7 @@ module.exports.userCreate = async (req, res, next) => {
                 data: null
             })
         } else {
-            const result = await userModel.userCreate(req)
+            const result = await userRepository.userCreate(req)
             if (result) {
                 res.status(statusCode.OK).json({
                     success: true,
@@ -91,7 +102,28 @@ module.exports.userCreate = async (req, res, next) => {
 
 module.exports.userList = async (req, res, next) => {
     try {
-        const result = await userModel.userList(req)
+        const result = await userRepository.userList(req)
+        if (result) {
+            res.status(statusCode.OK).json({
+                success: true,
+                data: result
+            })
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
+                data: nulls
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+    };
+};
+
+module.exports.userLoginLogList = async (req, res, next) => {
+    try {
+        const result = await userRepository.userLoginLogList(req)
         if (result) {
             res.status(statusCode.OK).json({
                 success: true,
@@ -135,11 +167,9 @@ module.exports.userDetails = async (req, res, next) => {
     };
 };
 
-
-
 module.exports.updateUser = async (req, res, next) => {
     try {
-        const result = await userModel.userUpdate(req)
+        const result = await userRepository.userUpdate(req)
         if (result) {
             res.status(statusCode.OK).json({
                 success: true,
@@ -159,151 +189,133 @@ module.exports.updateUser = async (req, res, next) => {
     };
 };
 
-
-module.exports.tweetGet = async (req, res, next) => {
+module.exports.emailVerify = async (req, res, next) => {
     try {
-        const result = await userModel.tweetGet(req)
-        if (result) {
-            res.status(statusCode.OK).json({
-                success: true,
-                data: result
-            })
-        } else {
-            res.status(statusCode.BAD_REQUEST).json({
-                success: false,
-                message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
-                data: null
-            })
-        }
-    }
-    catch (error) {
-        next(error)
-    };
-};
-
-
-module.exports.tweetCreate = async (req, res, next) => {
-    try {
-        const result = await userModel.tweetCreate(req);
-        if (result) {
-            res.status(statusCode.BAD_REQUEST).json({
-                success: false,
-                data: result
-            })
-        } else {
-            res.status(statusCode.BAD_REQUEST).json({
-                success: false,
-                message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
-                data: null
-            })
-        }
-    }
-    catch (error) {
-        next(error)
-    };
-};
-
-module.exports.tweetUpdate = async (req, res, next) => {
-    try {
-        const result = await userModel.tweetUpdate(req)
-        if (result) {
-            res.status(statusCode.OK).json({
-                success: true,
-                message: utility.getMessage(req, false, 'TWEET_UPDATED'),
-                data: result
-            })
-        } else {
-            res.status(statusCode.BAD_REQUEST).json({
-                success: false,
-                message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
-                data: null
-            })
-        }
-    }
-    catch (error) {
-        next(error)
-    };
-};
-
-module.exports.tweetList = async (req, res, next) => {
-    try {
-        const result = await userModel.tweetList(req)
-        if (result) {
-            res.status(statusCode.OK).json({
-                success: true,
-                data: result
-            })
-        } else {
-            res.status(statusCode.BAD_REQUEST).json({
-                success: false,
-                message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
-                data: nulls
-            })
-        }
-    }
-    catch (error) {
-        next(error)
-    };
-};
-
-module.exports.tweetDelete = async (req, res, next) => {
-    try {
-        const result = await userModel.tweetDelete(req)
-        if (result) {
-            res.status(statusCode.OK).json({
-                success: true,
-                message: utility.getMessage(req, false, 'TWEET_DELETED'),
-                data: result
-            })
-        } else {
-            res.status(statusCode.BAD_REQUEST).json({
-                success: false,
-                message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
-                data: null
-            })
-        }
-    }
-    catch (error) {
-        next(error)
-    };
-};
-
-
-module.exports.followUser = async (req, res, next) => {
-    try {
-        const query = {
-            _id: new ObjectId(req?.body?.user_id),
-        }
-        // Campare user same id
-        if (String(req?.body?.user_id) == String(req?.user?._id)) {
-            res.status(statusCode.BAD_REQUEST).json({
-                success: false,
-                message: utility.getMessage(req, false, 'SAMEUSER_NOT_EXIST'),
-                data: null
-            })
-        } else {
-            const emailResult = await userModel.checkUserDetails(query);
-            if (emailResult) {
-                const result = await userModel.followUser(req);
-                if (result) {
-                    res.status(statusCode.BAD_REQUEST).json({
-                        success: false,
-                        data: result
-                    })
-                } else {
-                    res.status(statusCode.BAD_REQUEST).json({
-                        success: false,
-                        message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
-                        data: null
-                    })
-                }
+        const userResult = await userRepository.userdetails(req);
+        if (userResult) {
+            req.body.isEmailVerify = true;
+            req.body.resetToken = null
+            req.userResult = userResult?.dataValues;
+            const result = await userRepository.userUpdate(req)
+            if (result) {
+                res.status(statusCode.OK).json({
+                    success: true,
+                    message: utility.getMessage(req, false, 'EMAIL_VERIFY'),
+                    data: {}
+                })
             } else {
                 res.status(statusCode.BAD_REQUEST).json({
                     success: false,
-                    message: utility.getMessage(req, false, 'USER_NOT_EXIST'),
+                    message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
                     data: null
                 })
             }
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'LINK_EXPIRE'),
+                data: null
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+    };
+};
+
+module.exports.resetPasswordLink = async (req, res, next) => {
+    try {
+        const userResult = await userRepository.userdetails(req);
+        if (userResult) {
+            req.body.resetToken = generateRandomString(6)
+            req.userResult = userResult?.dataValues;
+            const result = await userRepository.userUpdate(req)
+            if (result) {
+                sendGridEmail({
+                    message: `<html>
+                <head>
+                  <title>Please reset password</title>
+                </head>
+                
+                <body>
+                <p>Hello dear,</p>
+                  <h1>Your password link expire 1 hours</h1>
+                  <a href='${config?.app?.baseUrl}change/password/${result?.resetToken}'>Click here</a>
+                </body>        
+                </html>`, subject: 'Reset password', to: result?.email
+                });
+                res.status(statusCode.OK).json({
+                    success: true,
+                    message: utility.getMessage(req, false, 'RESET_LINK_SENT'),
+                    data: {}
+                })
+            } else {
+                res.status(statusCode.BAD_REQUEST).json({
+                    success: false,
+                    message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
+                    data: null
+                })
+            }
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'ACCOUNT_NOTEXIST'),
+                data: null
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+    };
+};
+
+module.exports.resetPassword = async (req, res, next) => {
+    try {
+        const userResult = await userRepository.userdetails(req);
+        if (userResult) {
+            const salt = await bcrypt.genSalt();
+            req.body.password = await bcrypt.hash(req?.body?.password, salt);
+            const result = await userRepository.userUpdate(req)
+            if (result) {
+                res.status(statusCode.OK).json({
+                    success: true,
+                    message: utility.getMessage(req, false, 'PASSWORD_UPDATED'),
+                    data: {}
+                })
+            } else {
+                res.status(statusCode.BAD_REQUEST).json({
+                    success: false,
+                    message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
+                    data: null
+                })
+            }
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'LINK_EXPIRE'),
+                data: null
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+    };
+};
+
+module.exports.moviesGet = async (req, res, next) => {
+    try {
+        const result = await userRepository.moviesGet(req)
+        if (result) {
+            res.status(statusCode.OK).json({
+                success: true,
+                data: result
+            })
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
+                data: null
+            })
         }
     }
     catch (error) {
@@ -312,9 +324,86 @@ module.exports.followUser = async (req, res, next) => {
 };
 
 
-module.exports.followUserGet = async (req, res, next) => {
+module.exports.moviesCreate = async (req, res, next) => {
     try {
-        const result = await userModel.followUserGet(req)
+        const result = await userRepository.moviesCreate(req);
+        if (result) {
+            res.status(statusCode.OK).json({
+                success: false,
+                message: utility.getMessage(req, false, 'MOVIE_CREATED'),
+                data: result
+            })
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
+                data: null
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+    };
+};
+
+module.exports.moviesUpdate = async (req, res, next) => {
+    try {
+        const movieResult = await userRepository.moviesGet(req);
+        if (movieResult) {
+            req.movieData = movieResult?.dataValues;
+            const result = await userRepository.moviesUpdate(req)
+            if (result) {
+                res.status(statusCode.OK).json({
+                    success: true,
+                    message: utility.getMessage(req, false, 'MOVIE_UPDATED'),
+                    data: result
+                })
+            } else {
+                res.status(statusCode.BAD_REQUEST).json({
+                    success: false,
+                    message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
+                    data: null
+                })
+            }
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'MOVIES_NOT_EXIST'),
+                data: null
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+    };
+};
+
+
+module.exports.uploadMediaForMovies = async (req, res, next) => {
+    try {
+        const movieResult = req?.file;
+        if (movieResult) {
+            res.status(statusCode.OK).json({
+                success: true,
+                data: movieResult
+            })
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'MOVIES_NOT_EXIST'),
+                data: null
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+    };
+};
+
+
+module.exports.moviesList = async (req, res, next) => {
+    try {
+        const result = await userRepository.moviesList(req)
         if (result) {
             res.status(statusCode.OK).json({
                 success: true,
@@ -332,3 +421,71 @@ module.exports.followUserGet = async (req, res, next) => {
         next(error)
     };
 };
+
+module.exports.moviesDelete = async (req, res, next) => {
+    try {
+        const movieResult = await userRepository.moviesGet(req);
+        if (movieResult) {
+
+            req.movieData = movieResult?.dataValues;
+            const result = await userRepository.moviesDelete(req)
+            if (result) {
+                res.status(statusCode.OK).json({
+                    success: true,
+                    message: utility.getMessage(req, false, 'MOVIE_DELETED'),
+                    data: result
+                })
+            } else {
+                res.status(statusCode.BAD_REQUEST).json({
+                    success: false,
+                    message: utility.getMessage(req, false, 'FALSE_RESPONSE'),
+                    data: null
+                })
+            }
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'MOVIES_NOT_EXIST'),
+                data: null
+            })
+        }
+
+    }
+    catch (error) {
+        next(error)
+    };
+};
+
+
+module.exports.moviesRating = async (req, res, next) => {
+    try {
+        const result = await userRepository.moviesGet(req);
+        if (result) {
+            const result = await userRepository.moviesRating(req);
+            if (result) {
+                res.status(statusCode.BAD_REQUEST).json({
+                    success: false,
+                    data: result,
+                    message: utility.getMessage(req, false, 'RATING_SENT'),
+
+                })
+            } else {
+                res.status(statusCode.BAD_REQUEST).json({
+                    success: false,
+                    message: utility.getMessage(req, false, 'RATING_EXIST'),
+                    data: null
+                })
+            }
+        } else {
+            res.status(statusCode.BAD_REQUEST).json({
+                success: false,
+                message: utility.getMessage(req, false, 'MOVIES_NOT_EXIST'),
+                data: null
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+    };
+};
+

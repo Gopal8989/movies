@@ -1,4 +1,4 @@
-# Bcekend Twitter clone API
+# Bcekend Movies clone API
 
 # Table of Contents
 [Pre-requisites](#Pre-requisites)
@@ -22,7 +22,7 @@ npm install
 
 - Setup database
 ```
-Create database tweetdb and update connection details in .env file
+Create database movies and update connection details in .env file
 ```
 - Build and run the project
 ```
@@ -31,6 +31,6 @@ npm start
 -  Navigate to `http://localhost:7080`
 
 - This JSON file postman collection all APIS
-Twitter api Docs_collection.json
+Movies api Docs_collection.json
 
 - This note.txt file add project related instruction

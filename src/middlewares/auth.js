@@ -1,6 +1,5 @@
-const { ObjectId } = require("mongodb");
 const jwt = require('../service/jwt.service.js');
-const userModel = require('../models/user.js');
+const userRepository = require('../repositories/user.repository.js');
 const utility = require('../utils/common.js');
 const { statusCode } = require('../constant/status-code.js');
 /**
@@ -17,15 +16,14 @@ const authValidateRequest = async (req, res, next) => {
             if (parts.length === 2) {
                 const scheme = parts[0];
                 const token = parts[1];
-                console.log(token, parts, 'token')
                 if (/^Bearer$/i.test(scheme)) {
+                    console.log(token)
                     const decodedToken = jwt.verifyToken(token);
                     console.log(decodedToken)
                     if (decodedToken) {
 
-                        console.log('decodedToken', decodedToken)
-                        const query = { _id: new ObjectId(decodedToken?.user_id), token: token }
-                        const userResult = await userModel.checkUserDetails(query);
+                        const query = { id: decodedToken?.id, token: token }
+                        const userResult = await userRepository.checkUserdetails(query);
                         if (userResult) {
                             req.user = userResult;
                             next();

@@ -5,8 +5,11 @@ const userValidator = require('../validations/user.js');
 const {
     validateMiddleware,
     authMiddleware,
+    authriztaionMiddleware,
+    mediaMiddleware
 } = middlewares;
 const userController = require("../controller/user.controller");
+const { userType } = require("../constant/enum.js");
 
 router.post("/login",
     validateMiddleware(userValidator.loginSchema),
@@ -14,6 +17,7 @@ router.post("/login",
 
 router.post("/logout",
     authMiddleware,
+    authriztaionMiddleware([userType.ADMIN, userType.USER]),
     userController.userLogout);
 
 router.post("/user",
@@ -22,37 +26,65 @@ router.post("/user",
 
 router.get("/user/detail",
     authMiddleware,
+    authriztaionMiddleware([userType.ADMIN, userType.USER]),
     userController.userDetails);
 
-router.put("/user/:id", validateMiddleware(userValidator.userUpdateDetailSchema),
+router.get("/user/email-veriry/:token",
+    validateMiddleware(userValidator.emailVerifySchema),
+    userController.emailVerify);
+
+router.post("/reset/password/link",
+    validateMiddleware(userValidator.resetPasswordSchema),
+    userController.resetPasswordLink);
+
+router.post("/reset/password/:token",
+    validateMiddleware(userValidator.changePasswordSchema),
+    userController.resetPassword);
+
+router.put("/user/:id", authMiddleware,
+    authriztaionMiddleware([userType.USER]), validateMiddleware(userValidator.userUpdateDetailSchema),
     userController.updateUser);
 
 router.get("/user", authMiddleware, userController.userList);
 
-router.post("/tweet",
+router.get("/user", authMiddleware, userController.userList);
+
+router.get("/user/login-log", authMiddleware, userController.userLoginLogList);
+
+router.post("/movies",
     authMiddleware,
-    validateMiddleware(userValidator.tweetCreateSchema),
-    userController.tweetCreate);
+    authriztaionMiddleware([userType.USER]),
+    validateMiddleware(userValidator.moviesCreateSchema),
+    mediaMiddleware.uploadMedia,
+    userController.moviesCreate);
 
-router.put("/tweet/:id",
+router.post("/upload-media",
     authMiddleware,
-    validateMiddleware(userValidator.tweetUpdateSchema),
-    userController.tweetUpdate);
+    authriztaionMiddleware([userType.USER]),
+    validateMiddleware(userValidator.mediaCreateSchema),
+    mediaMiddleware.uploadMedia,
+    userController.uploadMediaForMovies);
 
-router.get("/tweet", authMiddleware, userController.tweetList);
-
-router.get("/tweet/:id", authMiddleware, validateMiddleware(userValidator.userIdSchema),
-    userController.tweetGet);
-
-router.delete("/tweet/:id", authMiddleware, validateMiddleware(userValidator.userIdSchema),
-    userController.tweetDelete);
-
-router.post("/follow-user",
+router.put("/movies/:id",
     authMiddleware,
-    validateMiddleware(userValidator.followerCreateSchema),
-    userController.followUser);
+    authriztaionMiddleware([userType.USER]),
+    validateMiddleware(userValidator.moviesUpdateSchema),
+    mediaMiddleware.uploadMedia,
+    userController.moviesUpdate);
 
-router.get("/follow-user",
+router.get("/movies", authMiddleware, userController.moviesList);
+
+router.get("/movies/:id", authMiddleware, validateMiddleware(userValidator.userIdSchema),
+    userController.moviesGet);
+
+router.delete("/movies/:id", authMiddleware,
+    authriztaionMiddleware([userType.USER]), validateMiddleware(userValidator.userIdSchema),
+    userController.moviesDelete);
+
+router.post("/rating/:id",
     authMiddleware,
-    userController.followUserGet);
+    authriztaionMiddleware([userType.USER]),
+    validateMiddleware(userValidator.ratingCreateSchema),
+    userController.moviesRating);
+
 module.exports = router;

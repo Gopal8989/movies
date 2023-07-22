@@ -15,14 +15,23 @@ module.exports = {
     WRONG_CREDENTIAL: 'Email or Password is Wrong',
     LOGIN_SUCCESS: 'Login successful.',
     LOGOUT_SUCCESS: 'Logout successful.',
+    RESET_LINK_SENT: 'Reset link sent',
+    ACCOUNT_NOTEXIST: 'Account not exist',
+    PASSWORD_UPDATED: 'Password updated',
 
     /**
  * Auth message
  */
+    RATING_EXIST: 'Rating alredy exist',
+    RATING_SENT: 'Rating sent',
+    MOVIES_NOT_EXIST: 'Movie not exist',
     SAMEUSER_NOT_EXIST: 'Same user not follow',
     USER_NOT_EXIST: 'User not found',
-    TWEET_DELETED: 'Tweet deleted successfully',
-    TWEET_UPDATED: 'Tweet updated successfully',
+    MOVIE_DELETED: 'Movies deleted successfully',
+    MOVIE_UPDATED: 'Movies updated successfully',
+    MOVIE_CREATED: 'Movies created successfully',
+    EMAIL_VERIFY: 'Email verify successfully',
+    LINK_EXPIRE: 'Link expire',
     SESSION_EXPIRE: 'Your session has expired. Please login.',
     ACCOUNT_INACTIVE: 'Your Account is inactive, please contact to admin.',
     UNAUTHORIZED_USER_ACCESS: 'Unauthorized access or token required.',
